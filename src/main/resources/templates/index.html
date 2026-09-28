@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart-Spend Expense Tracker</title>
+  <!-- Bootstrap 5 CSS for responsive styling -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container py-5">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Smart-Spend Dashboard</h2>
+    <span class="text-muted">Manage Your Expenses</span>
+  </div>
+
+  <!-- Add Expense Form -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">Add New Expense</div>
+    <div class="card-body">
+      <form id="expenseForm" class="row g-3">
+        <div class="col-md-3">
+          <label class="form-label">Title</label>
+          <input type="text" id="title" class="form-control" required>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Amount</label>
+          <input type="number" id="amount" class="form-control" step="0.01" required>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Category</label>
+          <input type="text" id="category" class="form-control" required>
+        </div>
+        <div class="col-md-2">
+          <label class="form-label">Type</label>
+          <select id="type" class="form-select">
+            <option value="EXPENSE">Expense</option>
+            <option value="INCOME">Income</option>
+          </select>
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+          <button type="submit" class="btn btn-dark w-100">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Expense Table List -->
+  <div class="card shadow-sm">
+    <div class="card-header bg-secondary text-white">Transaction History</div>
+    <div class="card-body">
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Type</th>
+          <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody id="expenseTableBody">
+        <!-- Expenses will be loaded dynamically via JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript to communicate with your Deployed Spring Boot Backend -->
+<script>
+  // Replace this with your actual deployed backend URL once live on Render/Railway
+  const BACKEND_URL = "https://your-backend-app.onrender.com";
+
+  // Fetch and display expenses on page load
+  async function fetchExpenses() {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/expenses`);
+      if (response.ok) {
+        const expenses = await response.json();
+        const tbody = document.getElementById('expenseTableBody');
+        tbody.innerHTML = '';
+
+        expenses.forEach(exp => {
+          const row = `<tr>
+                            <td>${exp.title}</td>
+                            <td>${exp.category}</td>
+                            <td>${exp.type}</td>
+                            <td>$${exp.amount.toFixed(2)}</td>
+                        </tr>`;
+          tbody.innerHTML += row;
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching expenses:", error);
+    }
+  }
+
+  // Handle form submission to create a new expense
+  document.getElementById('expenseForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const newExpense = {
+      title: document.getElementById('title').value,
+      amount: parseFloat(document.getElementById('amount').value),
+      category: document.getElementById('category').value,
+      type: document.getElementById('type').value
+    };
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/expenses`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newExpense)
+      });
+
+      if (response.ok) {
+        alert('Expense added successfully!');
+        document.getElementById('expenseForm').reset();
+        fetchExpenses(); // Refresh table list
+      } else {
+        alert('Failed to add expense.');
+      }
+    } catch (error) {
+      console.error("Error adding expense:", error);
+    }
+  });
+
+  // Load data when page opens
+  fetchExpenses();
+</script>
+</body>
+</html>
