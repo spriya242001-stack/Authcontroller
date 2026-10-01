@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-
 @RestController
 @RequestMapping("/api/expenses")
 @CrossOrigin(origins = "*") // Allows React frontend requests
@@ -32,40 +31,7 @@ public class ExpenseController {
         return ResponseEntity.ok(expenses);
     }
 
-    // 2. Get single expense by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<ExpenseDTO> getExpenseById(@PathVariable Long id,
-                                                     Authentication authentication) {
-        ExpenseDTO expense = expenseService.getExpenseById(id, authentication.getName());
-        return ResponseEntity.ok(expense);
-    }
-
-    // 3. Create a new expense (Triggers budget alert check automatically)
-    @PostMapping
-    public ResponseEntity<ExpenseDTO> createExpense(@Valid @RequestBody ExpenseDTO expenseDTO,
-                                                    Authentication authentication) {
-        ExpenseDTO createdExpense = expenseService.createExpense(expenseDTO, authentication.getName());
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdExpense);
-    }
-
-    // 4. Update an existing expense
-    @PutMapping("/{id}")
-    public ResponseEntity<ExpenseDTO> updateExpense(@PathVariable Long id,
-                                                    @Valid @RequestBody ExpenseDTO expenseDTO,
-                                                    Authentication authentication) {
-        ExpenseDTO updatedExpense = expenseService.updateExpense(id, expenseDTO, authentication.getName());
-        return ResponseEntity.ok(updatedExpense);
-    }
-
-    // 5. Delete an expense by ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteExpense(@PathVariable Long id,
-                                              Authentication authentication) {
-        expenseService.deleteExpense(id, authentication.getName());
-        return ResponseEntity.noContent().build();
-    }
-
-    // 6. Filter expenses by date range or category
+    // 2. Filter expenses by date range or category (MUST BE BEFORE /{id} to avoid conflict)
     @GetMapping("/filter")
     public ResponseEntity<List<ExpenseDTO>> filterExpenses(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -75,5 +41,38 @@ public class ExpenseController {
 
         List<ExpenseDTO> filtered = expenseService.filterExpenses(startDate, endDate, category, authentication.getName());
         return ResponseEntity.ok(filtered);
+    }
+
+    // 3. Get single expense by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<ExpenseDTO> getExpenseById(@PathVariable Long id,
+                                                     Authentication authentication) {
+        ExpenseDTO expense = expenseService.getExpenseById(id, authentication.getName());
+        return ResponseEntity.ok(expense);
+    }
+
+    // 4. Create a new expense (Triggers budget alert check automatically)
+    @PostMapping
+    public ResponseEntity<ExpenseDTO> createExpense(@Valid @RequestBody ExpenseDTO expenseDTO,
+                                                    Authentication authentication) {
+        ExpenseDTO createdExpense = expenseService.createExpense(expenseDTO, authentication.getName());
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdExpense);
+    }
+
+    // 5. Update an existing expense
+    @PutMapping("/{id}")
+    public ResponseEntity<ExpenseDTO> updateExpense(@PathVariable Long id,
+                                                    @Valid @RequestBody ExpenseDTO expenseDTO,
+                                                    Authentication authentication) {
+        ExpenseDTO updatedExpense = expenseService.updateExpense(id, expenseDTO, authentication.getName());
+        return ResponseEntity.ok(updatedExpense);
+    }
+
+    // 6. Delete an expense by ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteExpense(@PathVariable Long id,
+                                              Authentication authentication) {
+        expenseService.deleteExpense(id, authentication.getName());
+        return ResponseEntity.noContent().build();
     }
 }

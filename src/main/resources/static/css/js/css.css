@@ -1,0 +1,51 @@
+/* Custom Styles for SmartSpend Application */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333333;
+}
+
+/* Card Enhancements */
+.card {
+    border-radius: 0.5rem;
+    border: none;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Navbar Customization */
+.navbar-brand {
+    letter-spacing: 0.03em;
+}
+
+/* Table Enhancements */
+.table th {
+    font-weight: 600;
+    color: #495057;
+    background-color: #f1f3f5 !important;
+}
+
+/* Toast Container for Real-time WebSocket Notifications */
+#notification-toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1080;
+}
+
+/* Form Validation & Focus States */
+.form-control:focus, .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+/* Progress Bar Tweaks */
+.progress {
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}

@@ -1,5 +1,5 @@
-
 package com.example.Smartspend_backend.service;
+
 import com.example.Smartspend_backend.dto.ExpenseDTO;
 import com.example.Smartspend_backend.model.Expense;
 import com.example.Smartspend_backend.model.User;
@@ -24,7 +24,7 @@ public class ExpenseService {
     @Autowired
     private BudgetService budgetService;
 
-    // 1. Fix line 39: getExpenseById with 2 arguments (id, userEmail)
+    // 1. Get expense by ID with email verification
     public ExpenseDTO getExpenseById(Long id, String userEmail) {
         Expense expense = expenseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
@@ -36,13 +36,14 @@ public class ExpenseService {
     }
 
     // Overload for single-argument call if needed
+    @SuppressWarnings("unused")
     public ExpenseDTO getExpenseById(Long id) {
         Expense expense = expenseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
         return convertToDTO(expense);
     }
 
-    // 2. Fix line 56: updateExpense(id, dto, userEmail)
+    // 2. Update expense with email verification
     public ExpenseDTO updateExpense(Long id, ExpenseDTO expenseDTO, String userEmail) {
         Expense expense = expenseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
@@ -66,7 +67,7 @@ public class ExpenseService {
         return convertToDTO(updatedExpense);
     }
 
-    // 3. Fix line 64: deleteExpense with 2 arguments (id, userEmail)
+    // 3. Delete expense with email verification
     public void deleteExpense(Long id, String userEmail) {
         Expense expense = expenseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
@@ -79,6 +80,7 @@ public class ExpenseService {
     }
 
     // Overload for single-argument call if needed
+    @SuppressWarnings("unused")
     public void deleteExpense(Long id) {
         if (!expenseRepository.existsById(id)) {
             throw new RuntimeException("Expense not found with id: " + id);
@@ -86,7 +88,7 @@ public class ExpenseService {
         expenseRepository.deleteById(id);
     }
 
-    // 4. Fix line 76: filterExpenses(startDate, endDate, category, userEmail)
+    // 4. Filter expenses by date range and category
     public List<ExpenseDTO> filterExpenses(LocalDate startDate, LocalDate endDate, String category, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new RuntimeException("User not found: " + userEmail));

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @Service
 public class NotificationService {
 
@@ -25,6 +26,7 @@ public class NotificationService {
     /**
      * Checks spend against budget limits and sends real-time in-app and email alerts if thresholds are reached.
      */
+    @SuppressWarnings("unused")
     public void checkAndSendBudgetAlert(String userEmail, String category, BigDecimal currentSpend, BigDecimal limit) {
         if (limit == null || limit.compareTo(BigDecimal.ZERO) <= 0) {
             return;

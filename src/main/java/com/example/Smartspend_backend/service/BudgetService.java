@@ -34,6 +34,7 @@ public class BudgetService {
     }
 
     // Overload for single-parameter call if used elsewhere
+    @SuppressWarnings("unused")
     public BudgetDTO createBudget(BudgetDTO budgetDTO) {
         Budget budget = convertToEntity(budgetDTO);
         Budget savedBudget = budgetRepository.save(budget);
@@ -63,6 +64,7 @@ public class BudgetService {
     }
 
     // Overload if called elsewhere with User object
+    @SuppressWarnings("unused")
     public List<Budget> getUserBudgets(User user) {
         return budgetRepository.findByUser(user);
     }
@@ -87,9 +89,8 @@ public class BudgetService {
         return budget;
     }
 
+    @SuppressWarnings("unused")
     public void checkBudgetAndNotify(Expense expense) {
-        if (expense == null || expense.getUser() == null || expense.getDate() == null) {
-            return;
-        }
+        // TODO: Implement budget validation and notification logic once service is wired up
     }
 }

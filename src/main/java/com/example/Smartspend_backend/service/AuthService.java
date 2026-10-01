@@ -31,8 +31,14 @@ public class AuthService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // Generate and return JWT or response token
-        String token = "generated-jwt-token-here";
+        // 1. Generate a real dynamic UUID token
+        String token = java.util.UUID.randomUUID().toString();
+
+        // 2. Save the token to the user object so your security filter can look it up
+        user.setToken(token); // (Make sure your User model has a setToken field, or adjust if you use a separate token table)
+        userRepository.save(user);
+
+        // 3. Return the response containing the real token
         return new AuthResponse(token, user.getEmail(), user.getRole());
     }
 
@@ -59,5 +65,20 @@ public class AuthService {
 
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
+    }
+    public AuthResponse register(AuthRequest request) {
+        User user = new User();
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole("USER"); // Default role
+
+        // Generate token so they are logged in immediately upon registering
+        String token = java.util.UUID.randomUUID().toString();
+        user.setToken(token);
+
+        userRepository.save(user);
+
+        // Return the response body so Postman receives the token JSON
+        return new AuthResponse(token, user.getEmail(), user.getRole());
     }
 }

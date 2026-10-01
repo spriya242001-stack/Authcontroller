@@ -21,6 +21,7 @@ public class EmailService {
         mailSender.send(message);
     }
 
+    @SuppressWarnings("unused")
     public void sendVerificationEmail(String to, String token) {
         String subject = "Smartspend - Account Verification";
         String verificationUrl = "http://localhost:8080/api/auth/verify?token=" + token;

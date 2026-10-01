@@ -1,9 +1,16 @@
 package com.example.Smartspend_backend.model;
+
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "verification_tokens")
+@Getter
+@Setter
+@NoArgsConstructor
 public class VerificationToken {
 
     @Id
@@ -18,19 +25,11 @@ public class VerificationToken {
 
     private LocalDateTime expiryDate;
 
-    public VerificationToken() {}
-
+    // Custom constructor used when creating tokens with an expiration offset
+    @SuppressWarnings("unused")
     public VerificationToken(String token, User user, int expiryMinutes) {
         this.token = token;
         this.user = user;
         this.expiryDate = LocalDateTime.now().plusMinutes(expiryMinutes);
     }
-
-    public Long getId() { return id; }
-    public String getToken() { return token; }
-    public void setToken(String token) { this.token = token; }
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
-    public LocalDateTime getExpiryDate() { return expiryDate; }
-    public void setExpiryDate(LocalDateTime expiryDate) { this.expiryDate = expiryDate; }
 }

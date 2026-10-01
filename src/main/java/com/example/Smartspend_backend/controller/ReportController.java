@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
@@ -18,8 +19,9 @@ public class ReportController {
     private ReportService reportService;
 
     @GetMapping("/pdf")
-    public ResponseEntity<byte[]> exportPdf(@RequestParam Long userId) {
-        ByteArrayInputStream pdfStream = reportService.generatePdfReport(userId);
+    public ResponseEntity<byte[]> exportPdf(@RequestParam Long userId, Authentication authentication) {
+        String userEmail = authentication.getName();
+        ByteArrayInputStream pdfStream = reportService.generatePdfReport(userId, userEmail);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=expense_report.pdf");
 
@@ -30,8 +32,9 @@ public class ReportController {
     }
 
     @GetMapping("/excel")
-    public ResponseEntity<byte[]> exportExcel(@RequestParam Long userId) {
-        ByteArrayInputStream excelStream = reportService.generateExcelReport(userId);
+    public ResponseEntity<byte[]> exportExcel(@RequestParam Long userId, Authentication authentication) {
+        String userEmail = authentication.getName();
+        ByteArrayInputStream excelStream = reportService.generateExcelReport(userId, userEmail);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=expense_report.xlsx");
 

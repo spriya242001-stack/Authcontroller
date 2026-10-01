@@ -5,10 +5,13 @@ import com.example.Smartspend_backend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
+@SuppressWarnings("unused")
 public interface BudgetRepository extends JpaRepository<Budget, Long> {
 
     // 1. Find all budgets associated with a specific user

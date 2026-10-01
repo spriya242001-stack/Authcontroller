@@ -31,9 +31,15 @@ public class ReportService {
     @Autowired
     private UserRepository userRepository;
 
-    public ByteArrayInputStream generatePdfReport(Long userId) {
+    public ByteArrayInputStream generatePdfReport(Long userId, String userEmail) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        // Security check: Only allow users to access their own reports
+        if (!user.getEmail().equals(userEmail)) {
+            throw new RuntimeException("Unauthorized access to user reports");
+        }
+        
         List<Expense> expenses = expenseRepository.findByUser(user);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -47,22 +53,10 @@ public class ReportService {
             document.add(new Paragraph("User: " + user.getEmail()));
             document.add(new Paragraph("\n"));
 
-            Table table = new Table(5);
-            table.addCell("Title");
-            table.addCell("Amount");
-            table.addCell("Category");
-            table.addCell("Type");
-            table.addCell("Date");
-
-            for (Expense expense : expenses) {
-                table.addCell(expense.getTitle() != null ? expense.getTitle() : "N/A");
-                table.addCell(expense.getAmount() != null ? expense.getAmount().toString() : "0");
-                table.addCell(expense.getCategory() != null ? expense.getCategory() : "N/A");
-                table.addCell(expense.getType() != null ? expense.getType() : "N/A");
-                table.addCell(expense.getDate() != null ? expense.getDate().toString() : "N/A");
-            }
-
+            // Extracted helper method for table creation
+            Table table = createExpenseTable(expenses);
             document.add(table);
+
             document.close();
         } catch (Exception e) {
             logger.error("Error generating PDF report for user id: {}", userId, e);
@@ -71,9 +65,33 @@ public class ReportService {
         return new ByteArrayInputStream(out.toByteArray());
     }
 
-    public ByteArrayInputStream generateExcelReport(Long userId) {
+    private Table createExpenseTable(List<Expense> expenses) {
+        Table table = new Table(5);
+        table.addCell("Title");
+        table.addCell("Amount");
+        table.addCell("Category");
+        table.addCell("Type");
+        table.addCell("Date");
+
+        for (Expense expense : expenses) {
+            table.addCell(expense.getTitle() != null ? expense.getTitle() : "N/A");
+            table.addCell(expense.getAmount() != null ? expense.getAmount().toString() : "0");
+            table.addCell(expense.getCategory() != null ? expense.getCategory() : "N/A");
+            table.addCell(expense.getType() != null ? expense.getType() : "N/A");
+            table.addCell(expense.getDate() != null ? expense.getDate().toString() : "N/A");
+        }
+        return table;
+    }
+
+    public ByteArrayInputStream generateExcelReport(Long userId, String userEmail) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        // Security check: Only allow users to access their own reports
+        if (!user.getEmail().equals(userEmail)) {
+            throw new RuntimeException("Unauthorized access to user reports");
+        }
+        
         List<Expense> expenses = expenseRepository.findByUser(user);
 
         try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {

@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>SmartSpend Navbar</title>
 </head>
 <body>
-$END$
+<!-- Navbar Fragment -->
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" th:href="@{/dashboard}">SmartSpend</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/expenses}">Expenses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/budgets}">Budgets</a>
+        </li>
+      </ul>
+      <form th:action="@{/logout}" method="post" class="d-flex">
+        <button class="btn btn-outline-light btn-sm" type="submit">Logout</button>
+      </form>
+    </div>
+  </div>
+</nav>
 </body>
 </html>

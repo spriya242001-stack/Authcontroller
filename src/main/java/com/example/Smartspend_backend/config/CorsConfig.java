@@ -4,10 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.filter.CorsFilter; // <-- This is the import you need
 
 import java.util.Arrays;
-import java.util.List;
+
 
 @Configuration
 public class CorsConfig {
@@ -16,8 +16,12 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
-        // Allow frontend origin (e.g., React localhost or deployed URL)
-        corsConfiguration.setAllowedOriginPatterns(List.of("http://localhost:3000", "https://*.vercel.app", "https://*.netlify.app"));
+        // Explicitly allow your Netlify app and local development
+        corsConfiguration.setAllowedOriginPatterns(Arrays.asList(
+                "http://localhost:*",
+                "https://*.netlify.app",
+                "https://incredible-toffee-ecf6f6.netlify.app"
+        ));
 
         // Allowed HTTP methods
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
@@ -25,7 +29,7 @@ public class CorsConfig {
         // Allowed headers
         corsConfiguration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin"));
 
-        // Allow sending credentials (cookies, HTTP basic auth, JWT headers)
+        // Allow sending credentials
         corsConfiguration.setAllowCredentials(true);
 
         // Max age for preflight options requests

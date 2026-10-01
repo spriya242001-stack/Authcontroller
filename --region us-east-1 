@@ -1,0 +1,170 @@
+============= i-0d8088ebb0cfc407a ==============
+----------------------------------------
+/var/log/eb-engine.log
+----------------------------------------
+2026/09/30 16:44:05.214271 [INFO] reading event message file
+2026/09/30 16:44:05.214792 [INFO] Engine received EB command cfn-hup-exec
+
+2026/09/30 16:44:05.289187 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-1:524212976268:stack/awseb-e-pr6fazftwm-stack/abaec4b0-bb63-11f1-bbbf-0ed767de901b -r AWSEBAutoScalingGroup --region us-east-1
+2026/09/30 16:44:05.474963 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-1:524212976268:stack/awseb-e-pr6fazftwm-stack/abaec4b0-bb63-11f1-bbbf-0ed767de901b -r AWSEBBeanstalkMetadata --region us-east-1
+2026/09/30 16:44:05.657667 [INFO] checking whether command tail-log is applicable to this instance...
+2026/09/30 16:44:05.657683 [INFO] this command is applicable to the instance, thus instance should execute command
+2026/09/30 16:44:05.657689 [INFO] Engine command: (tail-log)
+
+2026/09/30 16:44:05.657755 [INFO] Executing instruction: GetTailLogs
+2026/09/30 16:44:05.657759 [INFO] Tail Logs...
+2026/09/30 16:44:05.658638 [INFO] Running command: tail -n 100 /var/log/web.stdout.log
+2026/09/30 16:44:05.660823 [INFO] Running command: tail -n 100 /var/log/eb-engine.log
+2026/09/30 16:44:05.662906 [INFO] Running command: tail -n 100 /var/log/nginx/access.log
+2026/09/30 16:44:05.664615 [INFO] Running command: tail -n 100 /var/log/nginx/error.log
+2026/09/30 16:44:05.719793 [INFO] Executing cleanup logic
+2026/09/30 16:44:05.719888 [INFO] CommandService Response: {"status":"SUCCESS","api_version":"1.0","results":[{"status":"SUCCESS","msg":"Engine execution has succeeded.","returncode":0,"events":[{"msg":"Instance deployment completed successfully.","timestamp":1790786645719,"severity":"INFO"}]}]}
+
+2026/09/30 16:44:05.719921 [INFO] Platform Engine finished execution on command: tail-log
+
+2026/09/30 16:46:35.958171 [INFO] Starting...
+2026/09/30 16:46:35.958229 [INFO] Starting EBPlatform-PlatformEngine
+2026/09/30 16:46:35.958251 [INFO] reading event message file
+2026/09/30 16:46:35.958802 [INFO] Engine received EB command cfn-hup-exec
+
+2026/09/30 16:46:36.055842 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-1:524212976268:stack/awseb-e-pr6fazftwm-stack/abaec4b0-bb63-11f1-bbbf-0ed767de901b -r AWSEBAutoScalingGroup --region us-east-1
+2026/09/30 16:46:36.292693 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-1:524212976268:stack/awseb-e-pr6fazftwm-stack/abaec4b0-bb63-11f1-bbbf-0ed767de901b -r AWSEBBeanstalkMetadata --region us-east-1
+2026/09/30 16:46:36.486558 [INFO] checking whether command tail-log is applicable to this instance...
+2026/09/30 16:46:36.486571 [INFO] this command is applicable to the instance, thus instance should execute command
+2026/09/30 16:46:36.486576 [INFO] Engine command: (tail-log)
+
+2026/09/30 16:46:36.486630 [INFO] Executing instruction: GetTailLogs
+2026/09/30 16:46:36.486635 [INFO] Tail Logs...
+2026/09/30 16:46:36.487087 [INFO] Running command: tail -n 100 /var/log/web.stdout.log
+2026/09/30 16:46:36.489599 [INFO] Running command: tail -n 100 /var/log/eb-engine.log
+2026/09/30 16:46:36.491585 [INFO] Running command: tail -n 100 /var/log/nginx/access.log
+2026/09/30 16:46:36.493379 [INFO] Running command: tail -n 100 /var/log/nginx/error.log
+2026/09/30 16:46:36.551181 [INFO] Executing cleanup logic
+2026/09/30 16:46:36.551272 [INFO] CommandService Response: {"status":"SUCCESS","api_version":"1.0","results":[{"status":"SUCCESS","msg":"Engine execution has succeeded.","returncode":0,"events":[{"msg":"Instance deployment completed successfully.","timestamp":1790786796551,"severity":"INFO"}]}]}
+
+2026/09/30 16:46:36.551289 [INFO] Platform Engine finished execution on command: tail-log
+
+2026/09/30 16:47:25.935269 [INFO] Starting...
+2026/09/30 16:47:25.935321 [INFO] Starting EBPlatform-PlatformEngine
+2026/09/30 16:47:25.935342 [INFO] reading event message file
+2026/09/30 16:47:25.935857 [INFO] Engine received EB command cfn-hup-exec
+
+2026/09/30 16:47:26.018137 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-1:524212976268:stack/awseb-e-pr6fazftwm-stack/abaec4b0-bb63-11f1-bbbf-0ed767de901b -r AWSEBAutoScalingGroup --region us-east-1
+2026/09/30 16:47:26.218660 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-1:524212976268:stack/awseb-e-pr6fazftwm-stack/abaec4b0-bb63-11f1-bbbf-0ed767de901b -r AWSEBBeanstalkMetadata --region us-east-1
+2026/09/30 16:47:26.405009 [INFO] checking whether command tail-log is applicable to this instance...
+2026/09/30 16:47:26.405022 [INFO] this command is applicable to the instance, thus instance should execute command
+2026/09/30 16:47:26.405025 [INFO] Engine command: (tail-log)
+
+2026/09/30 16:47:26.405076 [INFO] Executing instruction: GetTailLogs
+2026/09/30 16:47:26.405079 [INFO] Tail Logs...
+2026/09/30 16:47:26.405392 [INFO] Running command: tail -n 100 /var/log/nginx/error.log
+2026/09/30 16:47:26.407593 [INFO] Running command: tail -n 100 /var/log/web.stdout.log
+2026/09/30 16:47:26.409650 [INFO] Running command: tail -n 100 /var/log/eb-engine.log
+2026/09/30 16:47:26.411431 [INFO] Running command: tail -n 100 /var/log/nginx/access.log
+2026/09/30 16:47:26.472425 [INFO] Executing cleanup logic
+2026/09/30 16:47:26.472514 [INFO] CommandService Response: {"status":"SUCCESS","api_version":"1.0","results":[{"status":"SUCCESS","msg":"Engine execution has succeeded.","returncode":0,"events":[{"msg":"Instance deployment completed successfully.","timestamp":1790786846472,"severity":"INFO"}]}]}
+
+2026/09/30 16:47:26.472533 [INFO] Platform Engine finished execution on command: tail-log
+
+2026/09/30 16:55:00.103967 [INFO] Starting...
+2026/09/30 16:55:00.104024 [INFO] Starting EBPlatform-PlatformEngine
+2026/09/30 16:55:00.104051 [INFO] reading event message file
+2026/09/30 16:55:00.104583 [INFO] Engine received EB command cfn-hup-exec
+
+2026/09/30 16:55:00.198554 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-1:524212976268:stack/awseb-e-pr6fazftwm-stack/abaec4b0-bb63-11f1-bbbf-0ed767de901b -r AWSEBAutoScalingGroup --region us-east-1
+2026/09/30 16:55:00.398496 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-1:524212976268:stack/awseb-e-pr6fazftwm-stack/abaec4b0-bb63-11f1-bbbf-0ed767de901b -r AWSEBBeanstalkMetadata --region us-east-1
+2026/09/30 16:55:00.580428 [INFO] checking whether command tail-log is applicable to this instance...
+2026/09/30 16:55:00.580444 [INFO] this command is applicable to the instance, thus instance should execute command
+2026/09/30 16:55:00.580454 [INFO] Engine command: (tail-log)
+
+2026/09/30 16:55:00.580509 [INFO] Executing instruction: GetTailLogs
+2026/09/30 16:55:00.580512 [INFO] Tail Logs...
+2026/09/30 16:55:00.580857 [INFO] Running command: tail -n 100 /var/log/nginx/error.log
+2026/09/30 16:55:00.583257 [INFO] Running command: tail -n 100 /var/log/web.stdout.log
+2026/09/30 16:55:00.585397 [INFO] Running command: tail -n 100 /var/log/eb-engine.log
+2026/09/30 16:55:00.587452 [INFO] Running command: tail -n 100 /var/log/nginx/access.log
+2026/09/30 16:55:00.642098 [INFO] Executing cleanup logic
+2026/09/30 16:55:00.642187 [INFO] CommandService Response: {"status":"SUCCESS","api_version":"1.0","results":[{"status":"SUCCESS","msg":"Engine execution has succeeded.","returncode":0,"events":[{"msg":"Instance deployment completed successfully.","timestamp":1790787300642,"severity":"INFO"}]}]}
+
+2026/09/30 16:55:00.642206 [INFO] Platform Engine finished execution on command: tail-log
+
+2026/09/30 17:00:22.833301 [INFO] Starting...
+2026/09/30 17:00:22.833350 [INFO] Starting EBPlatform-PlatformEngine
+2026/09/30 17:00:22.833376 [INFO] reading event message file
+2026/09/30 17:00:22.833890 [INFO] Engine received EB command cfn-hup-exec
+
+2026/09/30 17:00:22.908576 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-1:524212976268:stack/awseb-e-pr6fazftwm-stack/abaec4b0-bb63-11f1-bbbf-0ed767de901b -r AWSEBAutoScalingGroup --region us-east-1
+2026/09/30 17:00:23.118850 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:us-east-1:524212976268:stack/awseb-e-pr6fazftwm-stack/abaec4b0-bb63-11f1-bbbf-0ed767de901b -r AWSEBBeanstalkMetadata --region us-east-1
+2026/09/30 17:00:23.319954 [INFO] checking whether command tail-log is applicable to this instance...
+2026/09/30 17:00:23.319969 [INFO] this command is applicable to the instance, thus instance should execute command
+2026/09/30 17:00:23.319975 [INFO] Engine command: (tail-log)
+
+2026/09/30 17:00:23.320029 [INFO] Executing instruction: GetTailLogs
+2026/09/30 17:00:23.320032 [INFO] Tail Logs...
+2026/09/30 17:00:23.320361 [INFO] Running command: tail -n 100 /var/log/eb-engine.log
+
+
+----------------------------------------
+/var/log/nginx/access.log
+----------------------------------------
+
+
+----------------------------------------
+/var/log/nginx/error.log
+----------------------------------------
+2026/09/30 16:05:49 [warn] 2054#2054: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2026/09/30 16:05:49 [warn] 2101#2101: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+2026/09/30 16:05:49 [warn] 2105#2105: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
+
+
+----------------------------------------
+/var/log/web.stdout.log
+----------------------------------------
+Sep 30 16:05:49 ip-172-31-23-195 web[2083]: #011at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:420)
+Sep 30 16:05:49 ip-172-31-23-195 web[2083]: #011at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592)
+Sep 30 16:05:49 ip-172-31-23-195 web[2083]: #011at org.springframework.boot.loader.net.protocol.jar.JarUrlClassLoader.loadClass(JarUrlClassLoader.java:107)
+Sep 30 16:05:49 ip-172-31-23-195 web[2083]: #011at org.springframework.boot.loader.launch.LaunchedClassLoader.loadClass(LaunchedClassLoader.java:91)
+Sep 30 16:05:49 ip-172-31-23-195 web[2083]: #011at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+Sep 30 16:05:49 ip-172-31-23-195 web[2083]: #011at java.base/java.lang.Class.forName0(Native Method)
+Sep 30 16:05:49 ip-172-31-23-195 web[2083]: #011at java.base/java.lang.Class.forName(Class.java:469)
+Sep 30 16:05:49 ip-172-31-23-195 web[2083]: #011at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:99)
+Sep 30 16:05:49 ip-172-31-23-195 web[2083]: #011at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64)
+Sep 30 16:05:49 ip-172-31-23-195 web[2083]: #011at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: Exception in thread "main" java.lang.UnsupportedClassVersionError: com/example/Smartspend_backend/SmartspendBackendApplication has been compiled by a more recent version of the Java Runtime (class file version 66.0), this version of the Java Runtime only recognizes class file versions up to 61.0
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1017)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:150)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at java.base/java.net.URLClassLoader.defineClass(URLClassLoader.java:524)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:427)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:421)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:420)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at org.springframework.boot.loader.net.protocol.jar.JarUrlClassLoader.loadClass(JarUrlClassLoader.java:107)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at org.springframework.boot.loader.launch.LaunchedClassLoader.loadClass(LaunchedClassLoader.java:91)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at java.base/java.lang.Class.forName0(Native Method)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at java.base/java.lang.Class.forName(Class.java:469)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:99)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64)
+Sep 30 16:05:50 ip-172-31-23-195 web[2120]: #011at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: Exception in thread "main" java.lang.UnsupportedClassVersionError: com/example/Smartspend_backend/SmartspendBackendApplication has been compiled by a more recent version of the Java Runtime (class file version 66.0), this version of the Java Runtime only recognizes class file versions up to 61.0
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1017)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:150)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at java.base/java.net.URLClassLoader.defineClass(URLClassLoader.java:524)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:427)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:421)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:420)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at org.springframework.boot.loader.net.protocol.jar.JarUrlClassLoader.loadClass(JarUrlClassLoader.java:107)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at org.springframework.boot.loader.launch.LaunchedClassLoader.loadClass(LaunchedClassLoader.java:91)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at java.base/java.lang.Class.forName0(Native Method)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at java.base/java.lang.Class.forName(Class.java:469)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:99)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64)
+Sep 30 16:05:51 ip-172-31-23-195 web[2159]: #011at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40)
+Sep 30 16:05:52 ip-172-31-23-195 web[2197]: Exception in thread "main" java.lang.UnsupportedClassVersionError: com/example/Smartspend_backend/SmartspendBackendApplication has been compiled by a more recent version of the Java Runtime (class file version 66.0), this version of the Java Runtime only recognizes class file versions up to 61.0
+Sep 30 16:05:52 ip-172-31-23-195 web[2197]: #011at java.base/java.lang.ClassLoader.defineClass1(Nativ

@@ -9,5 +9,4 @@ public class SmartspendBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SmartspendBackendApplication.class, args);
 	}
-
 }

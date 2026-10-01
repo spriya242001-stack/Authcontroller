@@ -3,6 +3,7 @@ package com.example.Smartspend_backend.security;
 import org.springframework.stereotype.Service;
 
 @Service
+@SuppressWarnings("unused")
 public class JwtService {
 
     public String generateToken(String username) {

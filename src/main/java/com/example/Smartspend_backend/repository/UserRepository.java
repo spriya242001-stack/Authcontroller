@@ -7,10 +7,13 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
+@SuppressWarnings("unused")
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    // Find a user by email for authentication, JWT loading, and password resets
+    // Find a user by email for authentication, token loading, and password resets
     Optional<User> findByEmail(String email);
+
+    Optional<User> findByToken(String token);
 
     // Check if an email is already registered during sign-up
     Boolean existsByEmail(String email);

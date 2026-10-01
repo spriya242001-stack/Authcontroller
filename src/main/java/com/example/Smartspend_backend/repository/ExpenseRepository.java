@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
+@SuppressWarnings("unused")
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     List<Expense> findByUser(User user);

@@ -1,1 +1,1 @@
-web: java -jar target/Smartspend-backend-0.0.1-SNAPSHOT.jar
+web: java -jar Smartspend-backend-0.0.1-SNAPSHOT.jar
