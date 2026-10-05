@@ -1,0 +1,11 @@
+/api/* http://98.94.12.136:8080/api/:splat 200
+/logout http://98.94.12.136:8080/logout 200
+/ /index.html 200
+/login /login.html 200
+/register /register.html 200
+/dashboard /dashboard.html 200
+/expenses /expenses.html 200
+/budgets /budgets.html 200
+/forgot-password /forgot-password.html 200
+
+/reset-password /reset-password.html 200

@@ -16,9 +16,13 @@ public class PasswordResetRequest {
     @Email(message = "Invalid email format")
     private String email;
 
-    private String token; // Verification token or OTP sent via email
+    @NotBlank(message = "A valid reset link is required")
+    private String token;
 
-    @Size(min = 6, message = "New password must be at least 6 characters long")
+    @NotBlank(message = "New password is required")
+    @Size(min = 8, message = "New password must be at least 8 characters long")
     private String newPassword;
+
+
 
 }

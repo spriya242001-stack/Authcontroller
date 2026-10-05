@@ -32,7 +32,26 @@ build/
 ### VS Code ###
 .vscode/
 
+# Local deployment artifacts and CLI state
+.netlify/
+netlify-frontend.zip
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# Local credentials, generated exports, and editor files
+.smartspend-local.properties
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store
+.vtcode/
+.nova/
+vtcode.toml
+backend-source.zip
+frontend-source.zip
+netlify-frontend/

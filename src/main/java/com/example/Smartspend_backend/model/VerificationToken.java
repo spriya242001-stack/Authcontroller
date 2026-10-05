@@ -19,6 +19,9 @@ public class VerificationToken {
 
     private String token;
 
+    // Keep verification links separate from password recovery links.
+    private String purpose;
+
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
     private User user;

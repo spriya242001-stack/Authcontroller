@@ -7,6 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,14 +25,19 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthRequest request) {
+    public ResponseEntity<?> login(@RequestBody AuthRequest request, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
         if (request == null || request.getEmail() == null || request.getEmail().trim().isEmpty() ||
             request.getPassword() == null || request.getPassword().trim().isEmpty()) {
             return ResponseEntity.badRequest().body("Email and password are required");
         }
         try {
             AuthResponse response = authService.login(request);
-            logger.info("Login response: {}", response);
+            if (servletRequest.getSession(false) != null) {
+                servletRequest.changeSessionId();
+            }
+            new HttpSessionSecurityContextRepository().saveContext(
+                    SecurityContextHolder.getContext(), servletRequest, servletResponse);
+            logger.info("Login successful for {}", response.getEmail());
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             logger.error("Login failed: {}", e.getMessage());
@@ -43,6 +53,8 @@ public class AuthController {
         try {
             authService.verifyAccount(code);
             return ResponseEntity.ok("Account verified.");
+        } catch (UnsupportedOperationException e) {
+            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(e.getMessage());
         } catch (RuntimeException e) {
             logger.error("Verification failed: {}", e.getMessage());
             return ResponseEntity.badRequest().body("Verification failed: " + e.getMessage());
@@ -56,15 +68,18 @@ public class AuthController {
         }
         try {
             authService.processForgotPassword(email);
-            return ResponseEntity.ok("Password reset link sent.");
+            return ResponseEntity.ok("If an account exists, a password reset link has been sent.");
+        } catch (UnsupportedOperationException e) {
+            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(e.getMessage());
         } catch (RuntimeException e) {
             logger.error("Forgot password failed: {}", e.getMessage());
-            return ResponseEntity.badRequest().body("User not found: " + email);
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                    .body("Unable to send email right now. Please try again later.");
         }
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestBody PasswordResetRequest request) {
+    public ResponseEntity<?> resetPassword(@Valid @RequestBody PasswordResetRequest request) {
         if (request == null || request.getEmail() == null || request.getEmail().trim().isEmpty() ||
             request.getNewPassword() == null || request.getNewPassword().trim().isEmpty()) {
             return ResponseEntity.badRequest().body("Email and new password are required");
@@ -72,6 +87,8 @@ public class AuthController {
         try {
             authService.resetPassword(request);
             return ResponseEntity.ok("Password reset successful.");
+        } catch (UnsupportedOperationException e) {
+            return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(e.getMessage());
         } catch (RuntimeException e) {
             logger.error("Password reset failed: {}", e.getMessage());
             return ResponseEntity.badRequest().body("Password reset failed: " + e.getMessage());
@@ -79,14 +96,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody AuthRequest request) {
+    public ResponseEntity<?> register(@Valid @RequestBody AuthRequest request) {
         if (request == null || request.getEmail() == null || request.getEmail().trim().isEmpty() ||
             request.getPassword() == null || request.getPassword().trim().isEmpty()) {
             return ResponseEntity.badRequest().body("Email and password are required");
         }
         try {
             AuthResponse response = authService.register(request);
-            logger.info("Register response: {}", response);
+            logger.info("Registration successful for {}", response.getEmail());
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (RuntimeException e) {
             logger.error("Registration failed: {}", e.getMessage());

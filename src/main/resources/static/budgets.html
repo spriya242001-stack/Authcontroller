@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartSpend - Budgets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-light">
+
+<!-- Navbar Fragment -->
+<nav class="navbar navbar-expand navbar-dark bg-primary shadow-sm"><div class="container-fluid">
+<a class="navbar-brand fw-bold" href="/dashboard">SmartSpend</a><div class="navbar-nav me-auto">
+<a class="nav-link" href="/dashboard">Dashboard</a><a class="nav-link" href="/expenses">Expenses</a><a class="nav-link" href="/budgets">Budgets</a></div>
+<button id="logout-button" class="btn btn-outline-light btn-sm" type="button">Logout</button></div></nav>
+
+<div class="container my-4"><div id="page-message" class="alert" role="status" aria-live="polite" hidden></div>
+    <h2 class="mb-4 text-primary fw-bold">Category Budgets</h2>
+
+    <!-- Notifications / Alerts -->
+
+    <!-- Set Monthly Budget Form Card -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Set Monthly Budget per Category</h5>
+            <form id="budget-form" action="/api/budgets" method="post">
+                <div class="row g-3"><div class="col-md-4"><label for="period" class="form-label">Month</label><input type="month" id="period" name="period" class="form-control" min="0001-01" max="9999-12" required></div>
+                    <div class="col-md-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="" disabled selected>Choose category...</option>
+                            <option value="Food">Food & Dining</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Shopping">Shopping</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="limitAmount" class="form-label">Monthly Limit ($)</label>
+                        <input type="number" step="0.01" class="form-control" id="limitAmount" name="amount" min="0.01" placeholder="0.00" required>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">Save Budget</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Budget Overview & Tracking Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Active Budgets & Limit Alerts</h5>
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Category / Month</th>
+                        <th>Budget Limit</th>
+                        <th>Spent</th>
+                        <th>Remaining</th>
+                        <th>Progress</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody id="records"><tr><td colspan="6" class="text-center">Loading…</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/common.js" defer></script>
+<script src="/js/budgets.js" defer></script>
+</body>
+</html>

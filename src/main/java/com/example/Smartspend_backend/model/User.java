@@ -34,6 +34,8 @@ public class User implements UserDetails {
 
     private String token;
 
+    private Boolean emailVerified = false;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Expense> expenses;
 

@@ -16,7 +16,7 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     List<Expense> findByUser(User user);
 
-    @Query("SELECT SUM(e.amount) FROM Expense e WHERE e.user.email = :email AND e.category = :category AND MONTH(e.date) = :month AND YEAR(e.date) = :year AND e.type = 'EXPENSE'")
+    @Query("SELECT SUM(e.amount) FROM Expense e WHERE e.user.email = :email AND LOWER(TRIM(e.category)) = LOWER(TRIM(:category)) AND MONTH(e.date) = :month AND YEAR(e.date) = :year AND UPPER(TRIM(e.type)) = 'EXPENSE'")
     BigDecimal calculateTotalSpendByCategoryAndMonth(
             @Param("email") String email,
             @Param("category") String category,

@@ -8,11 +8,15 @@ import com.example.Smartspend_backend.repository.BudgetRepository;
 import com.example.Smartspend_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.example.Smartspend_backend.repository.ExpenseRepository;
+import java.math.BigDecimal;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 public class BudgetService {
 
     @Autowired
@@ -21,12 +25,19 @@ public class BudgetService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ExpenseRepository expenseRepository;
+
     // 1. Create budget accepting budgetDTO and user email
+    @Transactional
     public BudgetDTO createBudget(BudgetDTO budgetDTO, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new RuntimeException("User not found with email: " + userEmail));
 
-        Budget budget = convertToEntity(budgetDTO);
+        Budget budget = budgetRepository.findByUserAndCategoryAndMonthAndYear(
+                user, budgetDTO.getCategory(), budgetDTO.getMonth(), budgetDTO.getYear())
+                .orElseGet(() -> convertToEntity(budgetDTO));
+        budget.setAmount(budgetDTO.getAmount());
         budget.setUser(user);
 
         Budget savedBudget = budgetRepository.save(budget);
@@ -35,6 +46,7 @@ public class BudgetService {
 
     // Overload for single-parameter call if used elsewhere
     @SuppressWarnings("unused")
+    @Transactional
     public BudgetDTO createBudget(BudgetDTO budgetDTO) {
         Budget budget = convertToEntity(budgetDTO);
         Budget savedBudget = budgetRepository.save(budget);
@@ -77,6 +89,11 @@ public class BudgetService {
         dto.setAmount(budget.getAmount());
         dto.setMonth(budget.getMonth());
         dto.setYear(budget.getYear());
+        if (budget.getUser() != null) {
+            BigDecimal spent = expenseRepository.calculateTotalSpendByCategoryAndMonth(
+                    budget.getUser().getEmail(), budget.getCategory(), budget.getMonth(), budget.getYear());
+            dto.setSpentAmount(spent == null ? BigDecimal.ZERO : spent);
+        }
         return dto;
     }
 
